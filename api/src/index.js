@@ -3,11 +3,14 @@ import cors from "cors"
 import postRoutes from "./routes/posts.js"
 import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/user.js"
+import cookieParser from "cookie-parser"
+// npm i cookie-parser
 
 const PORT = process.env.PORT || 3333
 
 const app = express()
 app.use(express.json()) 
+app.use(cookieParser())
 app.use(cors())
 
 app.use("/api/posts", postRoutes)   // if we go to this endpoint we'll go to the postRoutes
