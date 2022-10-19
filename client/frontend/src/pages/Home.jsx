@@ -1,11 +1,31 @@
+import axios from 'axios'
 import React from 'react'
-import { Link } from "react-router-dom"
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { Link, useLocation } from "react-router-dom"
 
 function Home() {
+  const [posts, setPosts] = useState([])
+
+  const cat = useLocation().search  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const res = await axios.get(`/posts/get-posts${cat}`)
+        setPosts(res.data)
+      }catch(err) {
+        console.log(err)
+      }
+    }
+    fetchData()
+  }, [cat])
+
   return (
     <div className='home'>
-      {/* <div className="post">
-        {posts.map(post => {
+      <div className="posts">
+        {posts.map((post) => {
+          return(
           <div className="post" key={post.id}>
             <div className="img">
               <img src={post.img} />
@@ -15,13 +35,14 @@ function Home() {
               <Link className='link' to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{post.desc}</p>
+              <p>{post.descri}</p>
               <button>Read More</button>
 
             </div>
           </div>
+          )
         })}
-      </div> */}
+      </div>
     </div>
   )
 }

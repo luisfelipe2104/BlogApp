@@ -11,7 +11,9 @@ function Navbar() {
     <div className='navbar'>
       <div className="container">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <Link to='/'>
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <div className="links">
           <Link className='link' to="/?cat=art"><h6>ART</h6></Link>

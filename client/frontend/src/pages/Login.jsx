@@ -23,7 +23,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-      await login(inputs)
+      await login(inputs) // the login function from the authContext
       navigate("/")
     }catch(err){
       setError(err.response.data)
