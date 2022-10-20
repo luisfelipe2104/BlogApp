@@ -1,7 +1,7 @@
 import mysql from "mysql"
 
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: "bb9eejswmjcw3djbulc3-mysql.services.clever-cloud.com",
     user: "urbmudqlnnp7fqcy",
     password: "qBcPnVq7WTsUI6BVMXOY",

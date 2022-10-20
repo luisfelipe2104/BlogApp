@@ -54,7 +54,7 @@ function Single() {
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser ? currentUser.username === post.username && <div className="edit">
-            <Link to={`/write?edit=2`}>
+            <Link to={`/write?edit=${post.id}`} state={post}>
               <img src={edit} alt="edit" />
             </Link>
             <img onClick={handleDelete} src={Delete} alt="delete" />
@@ -64,7 +64,7 @@ function Single() {
         <p>{post.descri}</p>
       </div>
       <div className="menu">
-        <Menu />
+        <Menu cat={post.cat} />
       </div>
     </div>
   )
