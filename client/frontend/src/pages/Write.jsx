@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import AwaitImage from '../firebase/uploadImage.js';
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios';
 import { storage } from "../firebase/configs.js"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 
 function Write() {
+  const navigate = useNavigate()
   const [img, setImg] = useState(null)
   const [imgUrl, setImgUrl] = useState(null)
   const state = useLocation().state
@@ -50,6 +51,10 @@ function Write() {
         cat, 
         img: imgUrl ? imgUrl : "" 
       })
+      .then((res) => {
+        console.log(res)
+        navigate("/")
+      }).catch(err => console.log(err))
       :
       console.log("sdjlkefjlrk")
       await axios.post(`posts/add-post`, {
@@ -58,6 +63,10 @@ function Write() {
         cat, 
         img: url ? url : "" 
       })
+      .then((res) => {
+        console.log(res)
+        navigate("/")
+      }).catch(err => console.log(err))
     }catch(err){
       console.log(err)
     }
@@ -74,7 +83,7 @@ function Write() {
       </div>
       <div className="menu">
         <div className="item">
-          <h1>Publish {imgUrl}</h1>
+          <h1>Publish</h1>
           <span>
             <b>Status: </b> Draft
           </span>

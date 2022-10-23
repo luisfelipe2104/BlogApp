@@ -42,13 +42,11 @@ export const addPost = (req, res) => {
         const values = [req.body.title, req.body.descri, req.body.img, req.body.cat, userInfo.id]
 
         console.log(values)
-        db.query(q, values, (err, data) => {
-            if (err) res.status(500).json(err)
+        db.query(q, [values], (err, data) => {
+            if (err) return res.status(500).json(err)
             return res.status(200).json("Post has been created!")
         })
     })
-    console.log("okkk")
-    res.send("okkk")
 }
 
 // deletes posts
@@ -79,16 +77,14 @@ export const updatePost = (req, res) => {
         if (err) return res.status(403).json("Token is not valid!")
 
         const postId = req.params.id
-        const q = "UPDATE posts SET `title`=?, `descri`=?, `img`=?, `cat`=? WHERE `id` = ? AND `userId` = ?)"
-
+        const q = "UPDATE posts SET `title`=?, `descri`=?, `img`=?, `cat`=? WHERE `id` = ? AND `userId` = ?"
+        console.log("updating...")
         const values = [req.body.title, req.body.descri, req.body.img, req.body.cat]
 
-        console.log(values)
+        console.log(...values, postId, userInfo.id)
         db.query(q, [...values, postId, userInfo.id], (err, data) => {
-            if (err) res.status(500).json(err)
+            if (err) return res.status(500).json(err)
             return res.status(200).json("Post has been updated!")
         })
     })
-    console.log("okkk")
-    res.send("okkk")
 }
